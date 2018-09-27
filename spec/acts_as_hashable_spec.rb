@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #
 # Copyright (c) 2018-present, Blue Marble Payroll, LLC
 #
@@ -6,68 +8,12 @@
 #
 
 require './lib/acts_as_hashable'
-
-class Toy
-  acts_as_hashable
-
-  attr_reader :squishy
-
-  def initialize(opts = {})
-    @squishy = opts[:squishy] || false
-  end
-end
-
-class Pet
-  acts_as_hashable
-
-  attr_reader :name, :toy
-
-  def initialize(opts = {})
-    @name = opts[:name]
-    @toy  = Toy.make(opts[:toy])
-  end
-end
-
-class Person
-  acts_as_hashable
-
-  attr_reader :name, :age
-
-  def initialize(name:, age:)
-    @name = name
-    @age  = age
-  end
-end
-
-class HeadOfHousehold
-  acts_as_hashable
-
-  attr_reader :person, :partner
-
-  def initialize(person:, partner: nil)
-    @person   = Person.make(person)
-    @partner  = Person.make(partner)
-  end
-end
-
-class Family
-  acts_as_hashable
-
-  attr_reader :head_of_household, :children
-
-  def initialize(head_of_household:, children: [])
-    @head_of_household  = HeadOfHousehold.make(head_of_household)
-    @children           = Person.array(children)
-  end
-end
+require './spec/examples'
 
 describe ActsAsHashable do
   context '#make' do
-
     context 'with a hash constructor interface' do
-
       it 'should properly instantiate objects from a symbol-keyed hash' do
-
         pet = {
           name: 'Doug the dog',
           toy: { squishy: true }
@@ -78,20 +24,18 @@ describe ActsAsHashable do
         expect(pet_obj.name).to eq('Doug the dog')
         expect(pet_obj.toy.squishy).to be true
       end
-
     end
 
     context 'with keyword arguments interface' do
-
       it 'should properly instantiate objects from symbol-keyed hash' do
         head_of_household = {
           person: {
             name: 'Matt',
-            age:  109,
+            age:  109
           },
           partner: {
             name: 'Katie',
-            age:  110,
+            age:  110
           }
         }
 
@@ -107,11 +51,11 @@ describe ActsAsHashable do
         head_of_household = {
           'person'  => {
             'name'  => 'Matt',
-            'age'   => 109,
+            'age'   => 109
           },
           'partner' => {
             'name'  => 'Katie',
-            'age'   =>  110,
+            'age'   =>  110
           }
         }
 
@@ -127,11 +71,11 @@ describe ActsAsHashable do
         head_of_household = {
           person: {
             # name: 'Matt',
-            age:  109,
+            age:  109
           },
           partner: {
             name: 'Katie',
-            age:  110,
+            age:  110
           }
         }
 
@@ -143,36 +87,34 @@ describe ActsAsHashable do
           person: {
             name: 'Matt',
             age:  109,
-            height_in_inches: 700,
+            height_in_inches: 700
           },
           partner: {
             name: 'Katie',
-            age:  110,
+            age:  110
           }
         }
 
         expect { HeadOfHousehold.make(head_of_household) }.to raise_error(ArgumentError)
       end
-
     end
 
     context '#array' do
-
-      it 'should properly instantiate objects and arrays of objects from symbol-keyed hash and arrays' do
+      it 'should properly create objects and arrays of objects from symbol-keyed hash and arrays' do
         family = {
           head_of_household: {
             person: {
               name: 'Matt',
-              age:  109,
+              age:  109
             },
             partner: {
               name: 'Katie',
-              age:  110,
+              age:  110
             }
           },
           children: [
             { name: 'Martin', age: 29 },
-            { name: 'Short',  age: 99 },
+            { name: 'Short',  age: 99 }
           ]
         }
 
@@ -195,11 +137,11 @@ describe ActsAsHashable do
           head_of_household: {
             person: {
               name: 'Matt',
-              age:  109,
+              age:  109
             },
             partner: {
               name: 'Katie',
-              age:  110,
+              age:  110
             }
           },
           children: { name: 'Martin', age: 29 }
@@ -216,7 +158,6 @@ describe ActsAsHashable do
         expect(family_obj.children[0].name).to eq('Martin')
         expect(family_obj.children[0].age).to  eq(29)
       end
-
     end
   end
 end

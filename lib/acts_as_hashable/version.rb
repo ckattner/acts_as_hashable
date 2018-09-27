@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #
 # Copyright (c) 2018-present, Blue Marble Payroll, LLC
 #
@@ -6,5 +8,5 @@
 #
 
 module ActsAsHashable
-  VERSION = "1.0.2"
+  VERSION = '1.0.2'
 end

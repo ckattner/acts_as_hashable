@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #
 # Copyright (c) 2018-present, Blue Marble Payroll, LLC
 #
@@ -6,31 +8,27 @@
 #
 
 module ActsAsHashable
+  # This class contains the main set of class-level methods that can be used by
+  # hashable classes.
   module Hashable
-
     def array(object, nullable: true)
-      if object.is_a?(Hash)
-        objects = [ object ]
-      else
-        objects = Array(object)
-      end
+      objects = object.is_a?(Hash) ? [object] : Array(object)
 
       objects.select { |o| !!o }.map { |o| make(o, nullable: nullable) }
     end
 
     def make(object, nullable: true)
       if object.is_a?(Hash)
-        self.new(**::ActsAsHashable::Utilities.symbolize_keys(object))
+        new(**::ActsAsHashable::Utilities.symbolize_keys(object))
       elsif object.is_a?(self)
         object
       elsif object.nil? && nullable
         nil
       elsif object.nil? && !nullable
-        self.new
+        new
       else
         raise "Cannot create hashable object with class name: #{object.class.name}"
       end
     end
-
   end
 end

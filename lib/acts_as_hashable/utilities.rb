@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #
 # Copyright (c) 2018-present, Blue Marble Payroll, LLC
 #
@@ -6,9 +8,10 @@
 #
 
 module ActsAsHashable
+  # Some extra functions that are either ancillary to the main domain or polyfill other
+  # mainstream imnplementations.
   class Utilities
     class << self
-
       # https://apidock.com/rails/Hash/symbolize_keys
       def symbolize_keys(hash)
         transform_keys(hash) { |key| key.to_sym rescue key }
@@ -26,7 +29,6 @@ module ActsAsHashable
 
         result
       end
-
     end
   end
 end
