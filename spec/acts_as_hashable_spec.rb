@@ -5,7 +5,7 @@
 # LICENSE file in the root directory of this source tree.
 #
 
-require './lib/acts_as_hashable/acts_as_hashable'
+require './lib/acts_as_hashable'
 
 class Toy
   acts_as_hashable

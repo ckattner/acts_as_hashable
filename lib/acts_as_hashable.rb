@@ -5,6 +5,4 @@
 # LICENSE file in the root directory of this source tree.
 #
 
-module ActsAsHashable
-  VERSION = "1.0.1"
-end
+require_relative 'acts_as_hashable/acts_as_hashable'
