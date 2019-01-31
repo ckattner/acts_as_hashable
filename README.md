@@ -164,12 +164,12 @@ Note: ensure you have proper authorization before trying to publish new versions
 After code changes have successfully gone through the Pull Request review process then the following steps should be followed for publishing new versions:
 
 1. Merge Pull Request into master
-2. Update [lib/acts_as_hashable/version.rb](https://github.com/bluemarblepayroll/acts_as_hashable/blob/master/lib/acts_as_hashable/version.rb) [version number](https://semver.org/)
-3. Bundle
-4. Update [CHANGELOG.md](https://github.com/bluemarblepayroll/acts_as_hashable/blob/master/CHANGELOG.md)
-5. Commit & Push master to remote and ensure CI builds master successfully
+2. Update ```lib/acts_as_hashable/version.rb``` using [semantic versioning](https://semver.org/)
+3. Install dependencies: ```bundle```
+4. Update ```CHANGELOG.md``` with release notes
+5. Commit & push master to remote and ensure CI builds master successfully
 6. Build the project locally: `gem build acts_as_hashable`
-7. Publish package to NPM: `gem push acts_as_hashable-X.gem` where X is the version to push
+7. Publish package to RubyGems: `gem push acts_as_hashable-X.gem` where X is the version to push
 8. Tag master with new version: `git tag <version>`
 9. Push tags remotely: `git push origin --tags`
 
