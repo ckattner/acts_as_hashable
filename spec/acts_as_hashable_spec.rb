@@ -31,11 +31,11 @@ describe ActsAsHashable do
         head_of_household = {
           person: {
             name: 'Matt',
-            age:  109
+            age: 109
           },
           partner: {
             name: 'Katie',
-            age:  110
+            age: 110
           }
         }
 
@@ -49,13 +49,13 @@ describe ActsAsHashable do
 
       it 'should properly instantiate objects from symbol-keyed hash' do
         head_of_household = {
-          'person'  => {
-            'name'  => 'Matt',
-            'age'   => 109
+          'person' => {
+            'name' => 'Matt',
+            'age' => 109
           },
           'partner' => {
-            'name'  => 'Katie',
-            'age'   =>  110
+            'name' => 'Katie',
+            'age' => 110
           }
         }
 
@@ -71,11 +71,11 @@ describe ActsAsHashable do
         head_of_household = {
           person: {
             # name: 'Matt',
-            age:  109
+            age: 109
           },
           partner: {
             name: 'Katie',
-            age:  110
+            age: 110
           }
         }
 
@@ -86,12 +86,12 @@ describe ActsAsHashable do
         head_of_household = {
           person: {
             name: 'Matt',
-            age:  109,
+            age: 109,
             height_in_inches: 700
           },
           partner: {
             name: 'Katie',
-            age:  110
+            age: 110
           }
         }
 
@@ -105,11 +105,11 @@ describe ActsAsHashable do
           head_of_household: {
             person: {
               name: 'Matt',
-              age:  109
+              age: 109
             },
             partner: {
               name: 'Katie',
-              age:  110
+              age: 110
             }
           },
           children: [
@@ -137,11 +137,11 @@ describe ActsAsHashable do
           head_of_household: {
             person: {
               name: 'Matt',
-              age:  109
+              age: 109
             },
             partner: {
               name: 'Katie',
-              age:  110
+              age: 110
             }
           },
           children: { name: 'Martin', age: 29 }

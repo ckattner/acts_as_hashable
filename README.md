@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/bluemarblepayroll/acts_as_hashable.svg?branch=master)](https://travis-ci.org/bluemarblepayroll/acts_as_hashable)
 
-This is a small library that helps increase the pliability of object constructor signatures.  
+This is a small library that helps increase the pliability of object constructor signatures.
 Instead of instantiating via the constructor, this library can install helper factory
 class-level methods that you can use with hashes:
 
@@ -10,7 +10,7 @@ class-level methods that you can use with hashes:
 * array(): create an array of instances of a class
 
 One caveat to this library is that it is not meant to be a complete modeling solution but rather
-just a tool that helps model a domain or complete a modeling framework.  
+just a tool that helps model a domain or complete a modeling framework.
 The main missing element to this library is that you still have to manage and implement constructors.
 The two class-level factory methods are just meant to create a syntactic hash-like interface.
 
@@ -142,8 +142,36 @@ Basic steps to take to get this repository compiling:
 To execute the test suite run:
 
 ````
-rspec spec --format documentation
+bundle exec rspec spec --format documentation
 ````
+
+Alternatively, you can have Guard watch for changes:
+
+````
+bundle exec guard
+````
+
+Also, do not forget to run Rubocop:
+
+````
+bundle exec rubocop
+````
+
+### Publishing
+
+Note: ensure you have proper authorization before trying to publish new versions.
+
+After code changes have successfully gone through the Pull Request review process then the following steps should be followed for publishing new versions:
+
+1. Merge Pull Request into master
+2. Update [lib/acts_as_hashable/version.rb](https://github.com/bluemarblepayroll/acts_as_hashable/blob/master/lib/acts_as_hashable/version.rb) [version number](https://semver.org/)
+3. Bundle
+4. Update [CHANGELOG.md](https://github.com/bluemarblepayroll/acts_as_hashable/blob/master/CHANGELOG.md)
+5. Commit & Push master to remote and ensure CI builds master successfully
+6. Build the project locally: `gem build acts_as_hashable`
+7. Publish package to NPM: `gem push acts_as_hashable-X.gem` where X is the version to push
+8. Tag master with new version: `git tag <version>`
+9. Push tags remotely: `git push origin --tags`
 
 ## License
 
