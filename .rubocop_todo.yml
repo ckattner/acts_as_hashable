@@ -7,19 +7,6 @@
 # versions of RuboCop, may require this file to be generated again.
 
 # Offense count: 1
-Metrics/CyclomaticComplexity:
-  Max: 7
-
-# Offense count: 1
-# Configuration parameters: CountComments, ExcludedMethods.
-Metrics/MethodLength:
-  Max: 11
-
-# Offense count: 1
-Metrics/PerceivedComplexity:
-  Max: 8
-
-# Offense count: 1
 Style/DoubleNegation:
   Exclude:
     - 'lib/acts_as_hashable/hashable.rb'

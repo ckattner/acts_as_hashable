@@ -11,6 +11,29 @@ module ActsAsHashable
   # This class contains the main set of class-level methods that can be used by
   # hashable classes.
   module Hashable
+    HASHABLE_HYDRATORS = [
+      {
+        condition: ->(_context, object, _nullable) { object.is_a?(Hash) },
+        converter: lambda do |context, object, _nullable|
+          context.new(**::ActsAsHashable::Utilities.symbolize_keys(object))
+        end
+      },
+      {
+        condition: ->(_context, object, _nullable) { object.is_a?(self) },
+        converter: ->(_context, object, _nullable) { object }
+      },
+      {
+        condition: ->(_context, object, _nullable) { object.nil? && nullable },
+        converter: ->(_context, _object, _nullable) { nil }
+      },
+      {
+        condition: ->(_context, object, _nullable) { object.nil? && !nullable },
+        converter: ->(context, _object, _nullable) { context.new }
+      }
+    ].freeze
+
+    private_constant :HASHABLE_HYDRATORS
+
     def array(object, nullable: true)
       objects = object.is_a?(Hash) ? [object] : Array(object)
 
@@ -18,17 +41,13 @@ module ActsAsHashable
     end
 
     def make(object, nullable: true)
-      if object.is_a?(Hash)
-        new(**::ActsAsHashable::Utilities.symbolize_keys(object))
-      elsif object.is_a?(self)
-        object
-      elsif object.nil? && nullable
-        nil
-      elsif object.nil? && !nullable
-        new
-      else
-        raise "Cannot create hashable object with class name: #{object.class.name}"
+      HASHABLE_HYDRATORS.each do |hydrator|
+        if hydrator[:condition].call(self, object, nullable)
+          return hydrator[:converter].call(self, object, nullable)
+        end
       end
+
+      raise "Cannot create hashable object with class name: #{object.class.name}"
     end
   end
 end

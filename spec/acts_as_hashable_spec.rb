@@ -7,8 +7,7 @@
 # LICENSE file in the root directory of this source tree.
 #
 
-require './lib/acts_as_hashable'
-require './spec/examples'
+require './spec/spec_helper'
 
 describe ActsAsHashable do
   context '#make' do
