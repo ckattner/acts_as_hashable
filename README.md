@@ -1,6 +1,6 @@
 # Acts as Hashable
 
-[![Gem Version](https://badge.fury.io/rb/acts_as_hashable.svg)](https://badge.fury.io/rb/acts_as_hashable) [![Build Status](https://travis-ci.org/bluemarblepayroll/acts_as_hashable.svg?branch=master)](https://travis-ci.org/bluemarblepayroll/acts_as_hashable) [![Maintainability](https://api.codeclimate.com/v1/badges/647dac37b9a8177f3d84/maintainability)](https://codeclimate.com/github/bluemarblepayroll/acts_as_hashable/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/647dac37b9a8177f3d84/test_coverage)](https://codeclimate.com/github/bluemarblepayroll/acts_as_hashable/test_coverage)
+[![Gem Version](https://badge.fury.io/rb/acts_as_hashable.svg)](https://badge.fury.io/rb/acts_as_hashable) [![Build Status](https://travis-ci.org/bluemarblepayroll/acts_as_hashable.svg?branch=master)](https://travis-ci.org/bluemarblepayroll/acts_as_hashable) [![Maintainability](https://api.codeclimate.com/v1/badges/647dac37b9a8177f3d84/maintainability)](https://codeclimate.com/github/bluemarblepayroll/acts_as_hashable/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/647dac37b9a8177f3d84/test_coverage)](https://codeclimate.com/github/bluemarblepayroll/acts_as_hashable/test_coverage) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 This is a small library that helps increase the pliability of object constructor signatures.
 Instead of instantiating via the constructor, this library can install helper factory
