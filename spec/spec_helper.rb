@@ -9,9 +9,8 @@
 
 require 'simplecov'
 require 'simplecov-console'
+SimpleCov.formatter = SimpleCov::Formatter::Console
+SimpleCov.start
 
 require './lib/acts_as_hashable'
 require './spec/examples'
-
-SimpleCov.formatter = SimpleCov::Formatter::Console
-SimpleCov.start

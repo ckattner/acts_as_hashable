@@ -11,7 +11,48 @@ require './spec/spec_helper'
 
 describe ActsAsHashable do
   context '#make' do
+    context 'when passing in unacceptable input' do
+      it 'should raise ArgumentError for number' do
+        expect { Pet.make(1) }.to raise_error(ArgumentError)
+      end
+
+      it 'should raise ArgumentError for string' do
+        expect { Pet.make('') }.to raise_error(ArgumentError)
+      end
+
+      it 'should raise ArgumentError for true' do
+        expect { Pet.make(true) }.to raise_error(ArgumentError)
+      end
+
+      it 'should raise ArgumentError for array' do
+        expect { Pet.make([]) }.to raise_error(ArgumentError)
+      end
+    end
+
     context 'with a hash constructor interface' do
+      it 'should properly return object if object is already the same type' do
+        original_pet_obj = Pet.new
+        pet_obj = Pet.make(original_pet_obj)
+
+        expect(pet_obj.hash).to eq(original_pet_obj.hash)
+        expect(pet_obj.name).to be nil
+        expect(pet_obj.toy).to be nil
+      end
+
+      it 'should properly return hydrated object if nil is passed in and is not nullable' do
+        pet_obj = Pet.make(nil, nullable: false)
+
+        expect(pet_obj.name).to be nil
+        expect(pet_obj.toy).to be nil
+      end
+
+      it 'should properly return nil if nil is passed in and is nullable' do
+        pet_obj = Pet.make(nil, nullable: false)
+
+        expect(pet_obj.name).to be nil
+        expect(pet_obj.toy).to be nil
+      end
+
       it 'should properly instantiate objects from a symbol-keyed hash' do
         pet = {
           name: 'Doug the dog',
@@ -46,7 +87,7 @@ describe ActsAsHashable do
         expect(head_of_household_obj.partner.age).to eq(110)
       end
 
-      it 'should properly instantiate objects from symbol-keyed hash' do
+      it 'should properly instantiate objects from string-keyed hash' do
         head_of_household = {
           'person' => {
             'name' => 'Matt',

@@ -19,15 +19,15 @@ module ActsAsHashable
         end
       },
       {
-        condition: ->(_context, object, _nullable) { object.is_a?(self) },
+        condition: ->(context, object, _nullable) { object.is_a?(context) },
         converter: ->(_context, object, _nullable) { object }
       },
       {
-        condition: ->(_context, object, _nullable) { object.nil? && nullable },
+        condition: ->(_context, object, nullable) { object.nil? && nullable },
         converter: ->(_context, _object, _nullable) { nil }
       },
       {
-        condition: ->(_context, object, _nullable) { object.nil? && !nullable },
+        condition: ->(_context, object, nullable) { object.nil? && !nullable },
         converter: ->(context, _object, _nullable) { context.new }
       }
     ].freeze
@@ -48,7 +48,7 @@ module ActsAsHashable
         end
       end
 
-      raise "Cannot create hashable object with class name: #{object.class.name}"
+      raise ArgumentError, "Cannot create hashable object with class name: #{object.class.name}"
     end
   end
 end
