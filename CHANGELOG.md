@@ -1,3 +1,7 @@
+# 1.0.5 (February 5th, 2019)
+
+* Fixed equality bug in array reject block.
+
 # 1.0.4 (January 30th, 2019)
 
 Maintenance Release

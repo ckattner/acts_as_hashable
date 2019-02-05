@@ -37,7 +37,7 @@ module ActsAsHashable
     def array(object, nullable: true)
       objects = object.is_a?(Hash) ? [object] : Array(object)
 
-      objects.reject { |o| o == false || o.nil? }
+      objects.reject { |o| o.is_a?(FalseClass) || o.nil? }
              .map { |o| make(o, nullable: nullable) }
     end
 
