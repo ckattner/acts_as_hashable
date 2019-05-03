@@ -7,4 +7,26 @@
 # LICENSE file in the root directory of this source tree.
 #
 
-require_relative 'acts_as_hashable/acts_as_hashable'
+require 'forwardable'
+
+require_relative 'acts_as_hashable/factory'
+require_relative 'acts_as_hashable/hash_refinements'
+require_relative 'acts_as_hashable/type_factory'
+require_relative 'acts_as_hashable/hashable'
+
+module ActsAsHashable
+  # This module adds the class-level method that marks a class as hashable.
+  module DslHook
+    def acts_as_hashable
+      extend ::ActsAsHashable::Hashable
+    end
+
+    def acts_as_hashable_factory
+      extend ActsAsHashable::Factory
+    end
+  end
+end
+
+Object.class_eval do
+  extend ::ActsAsHashable::DslHook
+end

@@ -30,6 +30,8 @@ bundle add acts_as_hashable
 
 ## Examples
 
+### Utilizing Classes on Hashabled Classes
+
 Consider the following example:
 
 ````
@@ -125,6 +127,76 @@ class Pet
 end
 ````
 
+### Dynamic Factory Building
+
+More complex relationships may contain objects with disparate types.  In this case we can use the included factory
+pattern to help us build these.  Based on our examples above:
+
+```ruby
+class ExampleFactory
+  acts_as_hashable_factory
+
+  register 'Pet', Pet
+
+  register 'HeadOfHousehold', HeadOfHousehold
+end
+```
+
+Now we can dynamically build these using:
+
+```ruby
+objects = [
+  {
+    type: 'Pet',
+    name: 'Doug the dog',
+    toy: { squishy: true }
+  },
+  {
+    type: 'HeadOfHousehold',
+    person: {
+      name: 'Matt',
+      age: 109
+    },
+    partner: {
+      name: 'Katie',
+      age: 110
+    }
+  }
+]
+
+hydrated_objects = ExampleFactory.array(objects)
+```
+
+If the type key does not happen to be `type` then you can explicitly set this as:
+
+```ruby
+class ExampleFactory
+  acts_as_hashable_factory
+
+  type_key 'object_type'
+
+  register 'Pet', Pet
+
+  register 'HeadOfHousehold', HeadOfHousehold
+end
+```
+
+You can also choose to pass in a proc/lambda instead of a class constant:
+
+```ruby
+class ExampleFactory
+  acts_as_hashable_factory
+
+  type_key 'object_type'
+
+  register 'Pet', Pet
+
+  register 'HeadOfHousehold', ->(_key) { HeadOfHousehold }
+end
+```
+
+In case you need full control of the registry you can also choose to simply override the class-level `registry` method which will simply return a hash of keys (names) and values (class constants).
+
 ## Contributing
 
 ### Development Environment Configuration
@@ -168,10 +240,11 @@ After code changes have successfully gone through the Pull Request review proces
 3. Install dependencies: ```bundle```
 4. Update ```CHANGELOG.md``` with release notes
 5. Commit & push master to remote and ensure CI builds master successfully
-6. Build the project locally: `gem build acts_as_hashable`
-7. Publish package to RubyGems: `gem push acts_as_hashable-X.gem` where X is the version to push
-8. Tag master with new version: `git tag <version>`
-9. Push tags remotely: `git push origin --tags`
+6. Run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+
+## Code of Conduct
+
+Everyone interacting in this codebase, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/bluemarblepayroll/acts_as_hashable/blob/master/CODE_OF_CONDUCT.md).
 
 ## License
 

@@ -60,3 +60,21 @@ class Family
     @children           = Person.array(children)
   end
 end
+
+class ExampleFactory
+  acts_as_hashable_factory
+
+  type_key :object_type
+
+  register 'Person', Person
+
+  register 'Pet', Pet
+
+  register 'Toy', Toy
+
+  # These are examples of registering a proc instead of a class constant.  It
+  # will send the key through the argument if you need
+  register 'Familiy', ->(_key) { Family }
+
+  register 'HeadOfHousehold', ->(_key) { HeadOfHousehold }
+end

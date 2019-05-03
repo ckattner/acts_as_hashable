@@ -1,3 +1,7 @@
+# 1.1.0 (May 3rd, 2019)
+
+* Added acts_as_hashable_factory to dynamically create objects.
+
 # 1.0.5 (February 5th, 2019)
 
 * Fixed equality bug in array reject block.

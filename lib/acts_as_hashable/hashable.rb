@@ -11,11 +11,13 @@ module ActsAsHashable
   # This class contains the main set of class-level methods that can be used by
   # hashable classes.
   module Hashable
+    using HashRefinements
+
     HASHABLE_HYDRATORS = [
       {
         condition: ->(_context, object, _nullable) { object.is_a?(Hash) },
         converter: lambda do |context, object, _nullable|
-          context.new(**::ActsAsHashable::Utilities.symbolize_keys(object))
+          context.new(**(object || {}).symbolize_keys)
         end
       },
       {
