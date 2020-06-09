@@ -19,16 +19,23 @@ module ActsAsHashable
   #     }
   #   end
   # You can also use the 'register' DSL:
-  # register 'some_class_name', SomeClassName
+  #   register 'some_class_name', SomeClassName
+  #   register 'some_class_name', '', SomeClassName
   # or:
-  # register 'some_class_name', ->(_key) { SomeClassName }
+  #   register 'some_class_name', ->(_key) { SomeClassName }
   module Factory
     extend Forwardable
 
     def_delegators :factory, :array, :make
 
-    def register(key, value)
-      registry[key] = value
+    def register(*args)
+      raise ArgumentError, "missing at least one key and value: #{args}" if args.length < 2
+
+      value = args.last
+
+      args[0..-2].each do |key|
+        registry[key] = value
+      end
     end
 
     def registry

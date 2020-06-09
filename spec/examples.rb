@@ -61,16 +61,19 @@ class Family
   end
 end
 
+class ClassWithNoArguments
+  acts_as_hashable
+end
+
 class ExampleFactory
   acts_as_hashable_factory
 
   type_key :object_type
 
   register 'Person', Person
-
   register 'Pet', Pet
-
   register 'Toy', Toy
+  register 'class_with_no_arguments', ClassWithNoArguments
 
   # These are examples of registering a proc instead of a class constant.  It
   # will send the key through the argument if you need

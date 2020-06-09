@@ -7,6 +7,7 @@
 # LICENSE file in the root directory of this source tree.
 #
 
+require 'caution'
 require 'forwardable'
 
 require_relative 'acts_as_hashable/factory'

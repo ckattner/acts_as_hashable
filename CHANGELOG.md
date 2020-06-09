@@ -1,3 +1,9 @@
+# 1.2.0 (June 9th, 2020)
+
+* Bumped minimum Ruby version to >= 2.5
+* Do not pass in any constructor arguments unless we have at least one key.
+* Add more detail to construction errors.
+
 # 1.1.0 (May 3rd, 2019)
 
 * Added acts_as_hashable_factory to dynamically create objects.

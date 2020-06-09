@@ -12,6 +12,12 @@ require './spec/spec_helper'
 describe ActsAsHashable::Factory do
   subject { ExampleFactory }
 
+  context 'when hydrating classes argument-less constructors' do
+    it 'calls constructor with no arguments' do
+      expect { ExampleFactory.make(object_type: :class_with_no_arguments) }.not_to raise_error
+    end
+  end
+
   it 'should hydrate example objects' do
     objects = [
       {

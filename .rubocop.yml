@@ -3,9 +3,11 @@ Metrics/LineLength:
 
 Metrics/BlockLength:
   ExcludedMethods: ['it', 'describe', 'context', 'let', 'specify']
+  Exclude:
+    - acts_as_hashable.gemspec
 
 AllCops:
-  TargetRubyVersion: 2.3
+  TargetRubyVersion: 2.5
 
 Style/RescueModifier:
   Enabled: false

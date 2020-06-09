@@ -36,11 +36,16 @@ module ActsAsHashable
       type          = config[type_key].to_s.to_sym
       object_class  = registry[type]
 
-      raise ArgumentError, "cannot find section from type: #{type}" unless object_class
+      raise ArgumentError, "cannot find registration for: '#{type}'" unless object_class
 
       config_without_type = config.reject { |k| k == type_key }
 
-      object_class.new(config_without_type)
+      # We want to defer to the classes proper maker if it exists.
+      # Technically, this factory should only make classes that include Hashable, but just to be
+      # sure we do not break any existing compatibility, lets make it work for both.
+      method_name = object_class.respond_to?(:make) ? :make : :new
+
+      object_class.send(method_name, config_without_type)
     end
   end
 end
