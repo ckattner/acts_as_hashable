@@ -19,7 +19,7 @@ The two class-level factory methods are just meant to create a syntactic hash-li
 To install through Rubygems:
 
 ````
-gem install install acts_as_hashable
+gem install acts_as_hashable
 ````
 
 You can also add this to your Gemfile:
