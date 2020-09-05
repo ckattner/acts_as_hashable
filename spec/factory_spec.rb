@@ -12,44 +12,58 @@ require './spec/spec_helper'
 describe ActsAsHashable::Factory do
   subject { ExampleFactory }
 
-  context 'when hydrating classes argument-less constructors' do
-    it 'calls constructor with no arguments' do
-      expect { ExampleFactory.make(object_type: :class_with_no_arguments) }.not_to raise_error
+  describe '#make' do
+    context 'when registered object is a string' do
+      it 'does not raise error' do
+        expect { ExampleFactory.make(object_type: 'Toy') }.not_to raise_error
+      end
+
+      it 'instantiates correct class' do
+        toy = ExampleFactory.make(object_type: 'Toy')
+
+        expect(toy).to be_a(Toy)
+      end
     end
-  end
 
-  it 'should hydrate example objects' do
-    objects = [
-      {
-        object_type: 'Pet',
-        name: 'Doug the dog',
-        toy: { squishy: true }
-      },
-      {
-        object_type: 'HeadOfHousehold',
-        person: {
-          name: 'Matt',
-          age: 109
+    context 'when hydrating classes argument-less constructors' do
+      it 'calls constructor with no arguments' do
+        expect { ExampleFactory.make(object_type: :class_with_no_arguments) }.not_to raise_error
+      end
+    end
+
+    it 'should hydrate example objects' do
+      objects = [
+        {
+          object_type: 'Pet',
+          name: 'Doug the dog',
+          toy: { squishy: true }
         },
-        partner: {
-          name: 'Katie',
-          age: 110
+        {
+          object_type: 'HeadOfHousehold',
+          person: {
+            name: 'Matt',
+            age: 109
+          },
+          partner: {
+            name: 'Katie',
+            age: 110
+          }
         }
-      }
-    ]
+      ]
 
-    hydrated_objects = subject.array(objects)
+      hydrated_objects = subject.array(objects)
 
-    pet_obj = hydrated_objects.first
+      pet_obj = hydrated_objects.first
 
-    expect(pet_obj.name).to eq('Doug the dog')
-    expect(pet_obj.toy.squishy).to be true
+      expect(pet_obj.name).to eq('Doug the dog')
+      expect(pet_obj.toy.squishy).to be true
 
-    head_of_household_obj = hydrated_objects.last
+      head_of_household_obj = hydrated_objects.last
 
-    expect(head_of_household_obj.person.name).to eq('Matt')
-    expect(head_of_household_obj.person.age).to eq(109)
-    expect(head_of_household_obj.partner.name).to eq('Katie')
-    expect(head_of_household_obj.partner.age).to eq(110)
+      expect(head_of_household_obj.person.name).to eq('Matt')
+      expect(head_of_household_obj.person.age).to eq(109)
+      expect(head_of_household_obj.partner.name).to eq('Katie')
+      expect(head_of_household_obj.partner.age).to eq(110)
+    end
   end
 end

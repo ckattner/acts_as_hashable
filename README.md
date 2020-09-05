@@ -197,6 +197,21 @@ end
 
 In case you need full control of the registry you can also choose to simply override the class-level `registry` method which will simply return a hash of keys (names) and values (class constants).
 
+### Resolving Constants at Runtime
+
+Factories can also be resolved using Ruby's Object#const_get and Object#const_missing.  Simply register a string  representing the class in order to use these mechanics, such as:
+
+```ruby
+class ExampleFactory
+  acts_as_hashable_factory
+
+  type_key 'object_type'
+
+  register 'Pet', 'Pet'
+
+  register 'HeadOfHousehold', ->(_key) { HeadOfHousehold }
+end
+
 ## Contributing
 
 ### Development Environment Configuration

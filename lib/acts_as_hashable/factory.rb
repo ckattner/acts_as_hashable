@@ -38,22 +38,22 @@ module ActsAsHashable
       end
     end
 
-    def registry
+    def registry # :nodoc:
       @registry ||= {}
     end
 
-    def materialize_registry
+    def materialize_registry # :nodoc:
       @registry.map do |k, v|
         value = v.is_a?(Proc) ? v.call(k) : v
         [k, value]
       end.to_h
     end
 
-    def type_key(key)
+    def type_key(key) # :nodoc:
       @typed_with = key
     end
 
-    def typed_with
+    def typed_with # :nodoc:
       @typed_with || TypeFactory::DEFAULT_TYPE_KEY
     end
 

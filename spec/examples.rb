@@ -72,7 +72,7 @@ class ExampleFactory
 
   register 'Person', Person
   register 'Pet', Pet
-  register 'Toy', Toy
+  register 'Toy', 'Toy' # test out string constantization
   register 'class_with_no_arguments', ClassWithNoArguments
 
   # These are examples of registering a proc instead of a class constant.  It

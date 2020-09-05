@@ -1,3 +1,9 @@
+# 1.3.0 (September 5th, 2020)
+
+Additions:
+
+* Added dynamic class constantization when a string is registered for a Factory.
+
 # 1.2.0 (June 9th, 2020)
 
 * Bumped minimum Ruby version to >= 2.5

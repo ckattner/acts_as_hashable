@@ -10,7 +10,7 @@
 module ActsAsHashable
   # Let's provide a refinenment instead of monkey-patching Hash.  That way we can stop
   # polluting other libraries and internalize our specific needs.
-  module HashRefinements
+  module HashRefinements # :nodoc: all
     refine Hash do
       def symbolize_keys
         map { |k, v| [k.to_sym, v] }.to_h
