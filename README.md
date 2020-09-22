@@ -211,6 +211,7 @@ class ExampleFactory
 
   register 'HeadOfHousehold', ->(_key) { HeadOfHousehold }
 end
+```
 
 ## Contributing
 
