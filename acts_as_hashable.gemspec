@@ -18,15 +18,6 @@ Gem::Specification.new do |s|
   s.email       = ['mruggio@bluemarblepayroll.com']
   s.executables = []
   s.files       = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
-  s.homepage    = 'https://github.com/bluemarblepayroll/acts_as_hashable'
-  s.license     = 'MIT'
-  s.metadata    = {
-    'bug_tracker_uri' => 'https://github.com/bluemarblepayroll/acts_as_hashable/issues',
-    'changelog_uri' => 'https://github.com/bluemarblepayroll/acts_as_hashable/blob/master/CHANGELOG.md',
-    'documentation_uri' => 'https://www.rubydoc.info/gems/acts_as_hashable',
-    'homepage_uri' => s.homepage,
-    'source_code_uri' => s.homepage
-  }
 
   s.required_ruby_version = '>= 2.5'
 
