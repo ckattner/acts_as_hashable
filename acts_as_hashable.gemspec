@@ -18,7 +18,6 @@ Gem::Specification.new do |s|
   s.email       = ['mruggio@bluemarblepayroll.com']
   s.executables = []
   s.files       = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
-  s.homepage    = 'https://github.com/bluemarblepayroll/acts_as_hashable'
   s.license     = 'MIT'
 
   s.required_ruby_version = '>= 2.5'
