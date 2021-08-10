@@ -18,6 +18,8 @@ Gem::Specification.new do |s|
   s.email       = ['mruggio@bluemarblepayroll.com']
   s.executables = []
   s.files       = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
+  s.homepage    = 'https://github.com/bluemarblepayroll/acts_as_hashable'
+  s.license     = 'MIT'
 
   s.required_ruby_version = '>= 2.5'
 
@@ -28,7 +30,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency('pry-byebug', '~> 3')
   s.add_development_dependency('rake', '~> 13.0')
   s.add_development_dependency('rspec')
-  s.add_development_dependency('rspec_junit_formatter')
   s.add_development_dependency('rubocop', '~> 0.63.1')
   s.add_development_dependency('simplecov', '~>0.16.1')
   s.add_development_dependency('simplecov-console', '~>0.4.2')
