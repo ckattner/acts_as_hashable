@@ -37,6 +37,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency('pry-byebug', '~> 3')
   s.add_development_dependency('rake', '~> 13.0')
   s.add_development_dependency('rspec')
+  s.add_development_dependency('rspec_junit_formatter')
   s.add_development_dependency('rubocop', '~> 0.63.1')
   s.add_development_dependency('simplecov', '~>0.16.1')
   s.add_development_dependency('simplecov-console', '~>0.4.2')

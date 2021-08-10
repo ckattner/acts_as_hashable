@@ -4,3 +4,4 @@
 /coverage
 /pkg
 Gemfile.lock
+/test-results
