@@ -29,5 +29,5 @@ module ActsAsHashable
 end
 
 Object.class_eval do
-  extend ::ActsAsHashable::DslHook
+  extend ActsAsHashable::DslHook
 end

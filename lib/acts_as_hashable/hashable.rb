@@ -34,7 +34,7 @@ module ActsAsHashable
       },
       {
         condition: ->(_context, object, nullable) { object.nil? && nullable },
-        converter: ->(_context, _object, _nullable) { nil }
+        converter: ->(_context, _object, _nullable) {}
       },
       {
         condition: ->(_context, object, nullable) { object.nil? && !nullable },

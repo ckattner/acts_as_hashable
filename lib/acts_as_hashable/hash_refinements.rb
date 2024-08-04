@@ -13,7 +13,7 @@ module ActsAsHashable
   module HashRefinements # :nodoc: all
     refine Hash do
       def symbolize_keys
-        map { |k, v| [k.to_sym, v] }.to_h
+        transform_keys(&:to_sym)
       end
     end
   end
