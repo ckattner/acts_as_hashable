@@ -212,7 +212,7 @@ describe ActsAsHashable do
       end
 
       it 'raises ArgumentError when an argument is tried to be passed in' do
-        expect { ClassWithNoArguments.make(something: :else) }.to raise_error(hydration_error)
+        expect { ClassWithNoArguments.make({ something: :else }) }.to raise_error(hydration_error)
       end
     end
   end

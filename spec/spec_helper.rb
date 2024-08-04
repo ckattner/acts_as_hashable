@@ -10,7 +10,7 @@
 require 'pry'
 require 'pry-byebug'
 
-unless ENV['DISABLE_SIMPLECOV'] == 'true'
+unless ENV.fetch('DISABLE_SIMPLECOV', nil) == 'true'
   require 'simplecov'
   require 'simplecov-console'
 

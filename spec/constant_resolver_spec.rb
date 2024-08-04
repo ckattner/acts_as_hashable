@@ -9,29 +9,31 @@
 
 require 'spec_helper'
 
-describe ActsAsHashable::ConstantResolver do
-  module A
-    class B; end
-    class E; end
-  end
-
+# rubocop:disable Lint/EmptyClass
+module A
   class B; end
+  class E; end
+end
 
-  module C
-    class D; end
-    class E; end
+class B; end
 
-    module F
-      class G; end
-    end
+module C
+  class D; end
+  class E; end
+
+  module F
+    class G; end
   end
+end
+# rubocop:enable Lint/EmptyClass
 
+describe ActsAsHashable::ConstantResolver do
   it 'resolves nested constant with the same as an ancestor constants sibling' do
-    expect(subject.constantize('A::B')).to eq(::A::B)
+    expect(subject.constantize('A::B')).to eq(A::B)
   end
 
   it 'resolves root constant' do
-    expect(subject.constantize('B')).to eq(::B)
+    expect(subject.constantize('B')).to eq(B)
   end
 
   it 'does not resolve constant in a different parent module' do
@@ -43,8 +45,8 @@ describe ActsAsHashable::ConstantResolver do
   end
 
   it 'resolves same leaf constants specific to their parents' do
-    expect(subject.constantize('A::E')).to eq(::A::E)
-    expect(subject.constantize('C::E')).to eq(::C::E)
+    expect(subject.constantize('A::E')).to eq(A::E)
+    expect(subject.constantize('C::E')).to eq(C::E)
   end
 
   it 'does not resolve constant without its parent' do
