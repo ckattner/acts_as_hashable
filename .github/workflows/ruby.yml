@@ -9,7 +9,7 @@ name: Ruby
 
 on:
   push:
-    branches: [ "main", "update-ci" ]
+    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 
@@ -31,5 +31,19 @@ jobs:
       with:
         ruby-version: ${{ matrix.ruby-version }}
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+    - name: Run linter
+      run: bundle exec rubocop
     - name: Run tests
-      run: bundle exec rake
+      run: COVERAGE=true bundle exec rspec -r rspec_junit_formatter --format progress --format RspecJunitFormatter -o test-results/rspec/results.xml
+      env:
+        FORBID_FOCUSED_SPECS: 1
+    - name: Archive Gemfile.lock
+      uses: actions/upload-artifact@v4
+      with:
+        name: Gemfile.lock
+        path: Gemfile.lock
+    - name: Archive test results
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-results
+        path: test-results/rspec/results.xml
