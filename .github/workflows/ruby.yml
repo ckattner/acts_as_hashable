@@ -37,13 +37,13 @@ jobs:
       run: COVERAGE=true bundle exec rspec -r rspec_junit_formatter --format progress --format RspecJunitFormatter -o test-results/rspec/results.xml
       env:
         FORBID_FOCUSED_SPECS: 1
-    - name: Archive Gemfile.lock for Ruby ${{ matrix.ruby-version }}
+    - name: Archive Gemfile.lock
       uses: actions/upload-artifact@v4
       with:
-        name: Gemfile.lock
+        name: Gemfile.lock-${{ matrix.ruby-version }}
         path: Gemfile.lock
-    - name: Archive test results for Ruby ${{ matrix.ruby-version }}
+    - name: Archive test results
       uses: actions/upload-artifact@v4
       with:
-        name: test-results
+        name: test-results-${{ matrix.ruby-version }}
         path: test-results/rspec/results.xml
